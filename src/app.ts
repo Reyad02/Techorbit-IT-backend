@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import userRoutes from "./app/routes/userRoute";
 import authRoutes from "./app/routes/authRoutes";
+import courseRoutes from "./app/routes/courseRoutes";
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api/user", userRoutes);
 app.use("/api/user", authRoutes);
+app.use("/api/course", courseRoutes);
 
 export default app;
