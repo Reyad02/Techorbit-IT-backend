@@ -22,7 +22,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
 
     const token = createToken(isUserExist);
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "User logged in successfully",
       data: token,

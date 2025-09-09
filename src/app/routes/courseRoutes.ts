@@ -11,6 +11,7 @@ courseRoutes.post(
   courseControllers.createCourse
 );
 
+courseRoutes.delete("/:id", courseControllers.deleteCourse);
 courseRoutes.get("/:id", courseControllers.getSingleCourse);
 courseRoutes.get("/", courseControllers.getAllCourse);
 
