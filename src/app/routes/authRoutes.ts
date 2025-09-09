@@ -7,5 +7,6 @@ const authRoutes = Router();
 
 authRoutes.post("/login", validate(authValidation), authControllers.loginUser);
 authRoutes.post("/refresh-token", authControllers.refreshToken);
+authRoutes.post("/logout", authControllers.logoutUser);
 
 export default authRoutes;
