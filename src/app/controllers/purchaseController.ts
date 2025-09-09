@@ -1,0 +1,44 @@
+import { NextFunction, Request, Response } from "express";
+import course from "../models/Course";
+import user from "../models/User";
+import purchase from "../models/Purchase";
+
+const purchaseCourse = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const purchaseInfo = req?.body;
+    const purchaseUser = await user.findOne({ email: req.user?.email });
+    purchaseInfo.userId = purchaseUser?._id;
+
+    const isCourseExist = await course.findById(purchaseInfo?.courseId);
+    if(!isCourseExist){
+        throw new Error("Course doesn't exist.")
+    }
+
+    const existingPurchase = await purchase.findOne({ 
+      userId: purchaseInfo?.userId, 
+      courseId: purchaseInfo?.courseId 
+    });
+
+    if(existingPurchase){
+        throw new Error("You already purchased this course.")
+    }
+    
+    const result = await purchase.create(purchaseInfo);
+    res.status(201).json({
+      success: true,
+      message: "Course purchased successfully",
+      data: result,
+    });
+  } catch (err: any) {
+    next(err);
+  }
+};
+
+
+export const purchaseControllers = {
+  purchaseCourse,
+};

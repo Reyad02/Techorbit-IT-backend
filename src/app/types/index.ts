@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 export interface IUser {
   name: string;
   email: string;
@@ -10,4 +12,11 @@ export interface ICourse {
   description: string;
   price: number;
   instructor: string;
+}
+
+export interface IPurchase {
+  userId: Types.ObjectId;
+  courseId: Types.ObjectId;
+  amount: number;
+  date: Date;
 }

@@ -25,7 +25,7 @@ const authentication = (...roles: string[]) => {
         throw new Error("You are not an authorized user");
       }
 
-    //   req.user = decodedToken as JwtPayload;
+      req.user = decodedToken as JwtPayload;
       next();
     } catch (err: any) {
       res.status(err.statusCode || 500).json({
