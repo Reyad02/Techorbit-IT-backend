@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import course from "../models/Course";
+import { CustomError } from "../error/CustomError";
 
 const createCourse = async (
   req: Request,
@@ -45,7 +46,7 @@ const getSingleCourse = async (
     const id = req.params.id;
     const isCourseExist = await course.findOne({ _id:id });
     if (!isCourseExist) {
-      throw new Error("Course doesn't exist.");
+      throw new CustomError("Course doesn't exist.",401);
     }
     res.status(200).json({
       success: true,
@@ -65,7 +66,7 @@ const deleteCourse = async (
   try {
     const isCourseDeleted = await course.findByIdAndDelete(req.params.id);
     if (!isCourseDeleted) {
-      throw new Error("Course doesn't exist.");
+      throw new CustomError("Course doesn't exist.",401);
     }
     res.status(200).json({
       success: true,

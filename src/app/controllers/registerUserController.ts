@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import user from "../models/User";
+import { CustomError } from "../error/CustomError";
 
 const registerUser = async (
   req: Request,
@@ -10,7 +11,7 @@ const registerUser = async (
     const userInfo = req?.body;
     const isUserExist = await user.findOne({ email: userInfo?.email });
     if (isUserExist) {
-      throw new Error("User with this email already exists.");
+      throw new CustomError("User with this email already exists.",409);
     }
     const result = await user.create(userInfo);
     res.status(201).json({

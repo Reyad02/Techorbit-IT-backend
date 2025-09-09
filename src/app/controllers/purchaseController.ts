@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import course from "../models/Course";
 import user from "../models/User";
 import purchase from "../models/Purchase";
+import { CustomError } from "../error/CustomError";
 
 const purchaseCourse = async (
   req: Request,
@@ -15,7 +16,7 @@ const purchaseCourse = async (
 
     const isCourseExist = await course.findById(purchaseInfo?.courseId);
     if (!isCourseExist) {
-      throw new Error("Course doesn't exist.");
+      throw new CustomError("Course doesn't exist.",401);
     }
 
     // const existingPurchase = await purchase.findOne({

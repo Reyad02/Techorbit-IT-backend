@@ -9,8 +9,5 @@ export const authValidation = z.object({
     .string({
       error: (iss) =>
         iss.input === undefined ? "Email is required" : "Invalid email",
-    })
-    .min(6, {
-      message: "Password must be at least 6 characters long",
     }),
 });
