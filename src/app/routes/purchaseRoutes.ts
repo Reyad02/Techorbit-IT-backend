@@ -13,4 +13,10 @@ purchaseRoutes.post(
   purchaseControllers.purchaseCourse
 );
 
+purchaseRoutes.get(
+  "/",
+  authentication("user"),
+  purchaseControllers.userPurchasedCourse
+);
+
 export default purchaseRoutes;
