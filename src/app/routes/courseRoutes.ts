@@ -11,4 +11,7 @@ courseRoutes.post(
   courseControllers.createCourse
 );
 
+courseRoutes.get("/:id", courseControllers.getSingleCourse);
+courseRoutes.get("/", courseControllers.getAllCourse);
+
 export default courseRoutes;
