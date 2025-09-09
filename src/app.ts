@@ -5,11 +5,13 @@ import authRoutes from "./app/routes/authRoutes";
 import courseRoutes from "./app/routes/courseRoutes";
 import purchaseRoutes from "./app/routes/purchaseRoutes";
 import { errorHandlerMiddleware } from "./app/middlewares/errorHandlerMiddleware";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hi, your project is working!!!");
